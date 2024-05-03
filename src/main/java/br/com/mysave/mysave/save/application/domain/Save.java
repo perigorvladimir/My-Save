@@ -6,6 +6,6 @@ public class Save {
     Byte[] arquivo;
     String usuarioNome;
     LocalDate dataCriacao;
-    String jogo;
+    String nomeJogo;
     String emulador;
 }
