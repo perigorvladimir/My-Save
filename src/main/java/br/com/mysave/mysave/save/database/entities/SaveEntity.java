@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class SaveEntity {
     @Id
     private Integer id;
-    private Byte[] arquivo;
+    private byte[] arquivo;
     private String usuarioNome;
     private LocalDate dataCriacao;
     private String nomeJogo;
