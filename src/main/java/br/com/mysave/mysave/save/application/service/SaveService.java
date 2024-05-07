@@ -9,8 +9,11 @@ import br.com.mysave.mysave.save.database.entities.SaveEntity;
 import br.com.mysave.mysave.shared.ResponseServer;
 import br.com.mysave.mysave.util.CustomGenericMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,24 +28,37 @@ public class SaveService implements SaveUC {
     }
     @Override
     public ResponseServer<List<Save>> findSaves() {
-        List<SaveEntity> saveEntities = saveRepository.findAllSaves();
-        List<Save> saves = saveEntities.stream().map(saveEntity -> mapper.map(saveEntity, Save.class)).collect(Collectors.toList());
-        return ResponseServer.<List<Save>>builder()
-                .statusCode(200)
-                .data(saves)
-                .mensagem("Sucesso ao buscar Saves!")
-                .mensagemDesenvolvedor("Sucesso ao buscar Saves!")
-                .build();
+        try{
+            List<SaveEntity> saveEntities = saveRepository.findAllSaves();
+            List<Save> saves = saveEntities.stream().map(saveEntity -> mapper.map(saveEntity, Save.class)).collect(Collectors.toList());
+            return ResponseServer.<List<Save>>builder()
+                    .statusCode(200)
+                    .data(LocalDate.now())
+                    .dado(saves)
+                    .mensagem("Sucesso ao buscar Saves!")
+                    .mensagemDesenvolvedor("Sucesso ao buscar Saves!")
+                    .build();
+        } catch (Exception e){
+            return ResponseServer.<List<Save>>builder()
+                    .statusCode(500)
+                    .mensagem("Erro interno ao tentar buscar saves. Por favor tente novamente.")
+                    .mensagemDesenvolvedor(e.getMessage())
+                    .build();
+        }
+
     }
     @Override
+    @Transactional
     public ResponseServer<Save> salvarSave(SalvarSaveUC.Request request) {
         return null;
     }
     @Override
+    @Transactional
     public ResponseServer<Save> atualizarSave(AtualizarSaveUC.Request request) {
         return null;
     }
     @Override
+    @Transactional
     public ResponseServer<Boolean> deletarSave(Integer id) {
         return null;
     }

@@ -16,15 +16,16 @@ public class SaveController {
     public ResponseEntity<?> findSave(@PathVariable Integer saveId){
         return ResponseEntity.ok(saveId);
     }
-    @GetMapping()
+    @GetMapping("")
     public ResponseEntity<?> findSaves(){
-        return ResponseEntity.ok("");
+        var response = saveUC.findSaves();
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
-    @PostMapping()
+    @PostMapping("")
     public ResponseEntity<?> salvarSave(@RequestBody SalvarSaveUC.Request request){
         return ResponseEntity.ok("");
     }
-    @PutMapping()
+    @PutMapping("")
     public ResponseEntity<?> atualizarSave(@RequestBody AtualizarSaveUC.Request request){
         return ResponseEntity.ok("");
     }
