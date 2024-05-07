@@ -9,6 +9,7 @@ import br.com.mysave.mysave.save.database.entities.SaveEntity;
 import br.com.mysave.mysave.shared.ResponseServer;
 import br.com.mysave.mysave.util.CustomGenericMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
