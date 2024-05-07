@@ -10,7 +10,9 @@ import br.com.mysave.mysave.shared.ResponseServer;
 import br.com.mysave.mysave.util.CustomGenericMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +32,8 @@ public class SaveService implements SaveUC {
             List<Save> saves = saveEntities.stream().map(saveEntity -> mapper.map(saveEntity, Save.class)).collect(Collectors.toList());
             return ResponseServer.<List<Save>>builder()
                     .statusCode(200)
-                    .data(saves)
+                    .data(LocalDate.now())
+                    .dado(saves)
                     .mensagem("Sucesso ao buscar Saves!")
                     .mensagemDesenvolvedor("Sucesso ao buscar Saves!")
                     .build();
@@ -44,14 +47,17 @@ public class SaveService implements SaveUC {
 
     }
     @Override
+    @Transactional
     public ResponseServer<Save> salvarSave(SalvarSaveUC.Request request) {
         return null;
     }
     @Override
+    @Transactional
     public ResponseServer<Save> atualizarSave(AtualizarSaveUC.Request request) {
         return null;
     }
     @Override
+    @Transactional
     public ResponseServer<Boolean> deletarSave(Integer id) {
         return null;
     }

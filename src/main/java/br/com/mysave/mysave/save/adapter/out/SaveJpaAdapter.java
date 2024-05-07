@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpServerErrorException;
 
-import java.sql.SQLException;
+import java.sql.SQLTransientException;
 import java.util.List;
 
 @Component
@@ -18,12 +18,8 @@ public class SaveJpaAdapter implements SaveRepository {
     public List<SaveEntity> findAllSaves() throws Exception{
         try{
             return saveJpaRepository.findAll();
-        } catch (SQLException sqlException) {
-            throw new SQLException("Erro de SQL");
-        } catch (HttpServerErrorException esee){
-            throw new HttpServerErrorException("Erro ao se comunicar com banco de dados");
         } catch (Exception e){
-
+            throw new SQLTransientException("Erro ao se comunicar com banco de dados", e);
         }
     }
 }
