@@ -25,14 +25,23 @@ public class SaveService implements SaveUC {
     }
     @Override
     public ResponseServer<List<Save>> findSaves() {
-        List<SaveEntity> saveEntities = saveRepository.findAllSaves();
-        List<Save> saves = saveEntities.stream().map(saveEntity -> mapper.map(saveEntity, Save.class)).collect(Collectors.toList());
-        return ResponseServer.<List<Save>>builder()
-                .statusCode(200)
-                .data(saves)
-                .mensagem("Sucesso ao buscar Saves!")
-                .mensagemDesenvolvedor("Sucesso ao buscar Saves!")
-                .build();
+        try{
+            List<SaveEntity> saveEntities = saveRepository.findAllSaves();
+            List<Save> saves = saveEntities.stream().map(saveEntity -> mapper.map(saveEntity, Save.class)).collect(Collectors.toList());
+            return ResponseServer.<List<Save>>builder()
+                    .statusCode(200)
+                    .data(saves)
+                    .mensagem("Sucesso ao buscar Saves!")
+                    .mensagemDesenvolvedor("Sucesso ao buscar Saves!")
+                    .build();
+        } catch (Exception e){
+            return ResponseServer.<List<Save>>builder()
+                    .statusCode(500)
+                    .mensagem("Erro interno ao tentar buscar saves. Por favor tente novamente.")
+                    .mensagemDesenvolvedor(e.getMessage())
+                    .build();
+        }
+
     }
     @Override
     public ResponseServer<Save> salvarSave(SalvarSaveUC.Request request) {

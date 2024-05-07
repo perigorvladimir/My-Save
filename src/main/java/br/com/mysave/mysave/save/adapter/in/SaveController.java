@@ -18,7 +18,8 @@ public class SaveController {
     }
     @GetMapping()
     public ResponseEntity<?> findSaves(){
-        return ResponseEntity.ok("");
+        var response = saveUC.findSaves();
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
     @PostMapping()
     public ResponseEntity<?> salvarSave(@RequestBody SalvarSaveUC.Request request){
