@@ -4,9 +4,7 @@ import br.com.mysave.mysave.save.application.usecases.AtualizarSaveUC;
 import br.com.mysave.mysave.save.application.usecases.SalvarSaveUC;
 import br.com.mysave.mysave.save.application.usecases.SaveUC;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RestController
@@ -18,11 +16,16 @@ public class SaveController {
     public ResponseEntity<?> findSave(@PathVariable Integer saveId){
         return ResponseEntity.ok(saveId);
     }
-    @PostMapping()
+    @GetMapping("")
+    public ResponseEntity<?> findSaves(){
+        var response = saveUC.findSaves();
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+    @PostMapping("")
     public ResponseEntity<?> salvarSave(@RequestBody SalvarSaveUC.Request request){
         return ResponseEntity.ok("");
     }
-    @PutMapping()
+    @PutMapping("")
     public ResponseEntity<?> atualizarSave(@RequestBody AtualizarSaveUC.Request request){
         return ResponseEntity.ok("");
     }

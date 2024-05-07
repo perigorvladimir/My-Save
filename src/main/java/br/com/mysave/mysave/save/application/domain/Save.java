@@ -1,11 +1,18 @@
 package br.com.mysave.mysave.save.application.domain;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
+import java.time.LocalDate;
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Save {
-    Byte[] arquivo;
+    byte[] arquivo;
     String usuarioNome;
     LocalDate dataCriacao;
-    String jogo;
+    String nomeJogo;
     String emulador;
 }
