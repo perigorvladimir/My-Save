@@ -1,3 +1,5 @@
+SET SCHEMA my_save;
+
 DROP TABLE IF EXISTS save;
 CREATE TABLE save(
     id INT PRIMARY KEY,
