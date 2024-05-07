@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class ResponseServer<T>{
+    private T dado;
     private Integer statusCode;
     private String mensagem;
     private String mensagemDesenvolvedor;
     private LocalDate data;
-    private T dado;
 }
