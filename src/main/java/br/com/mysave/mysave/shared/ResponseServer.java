@@ -1,10 +1,10 @@
 package br.com.mysave.mysave.shared;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.hibernate.annotations.NotFound;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
@@ -15,5 +15,6 @@ public class ResponseServer<T>{
     private Integer statusCode;
     private String mensagem;
     private String mensagemDesenvolvedor;
-    private LocalDate data;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    private LocalDateTime data;
 }

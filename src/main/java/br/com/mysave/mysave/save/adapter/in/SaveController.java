@@ -13,8 +13,9 @@ public class SaveController {
     private final SaveUC saveUC;
 
     @GetMapping("/{saveId}")
-    public ResponseEntity<?> findSave(@PathVariable Integer saveId){
-        return ResponseEntity.ok(saveId);
+    public ResponseEntity<?> findSaveById(@PathVariable Integer saveId){
+        var response = saveUC.findSaveById(saveId);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
     @GetMapping("")
     public ResponseEntity<?> findSaves(){
