@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class Save {
+    Integer id;
     byte[] arquivo;
     String usuarioNome;
     LocalDate dataCriacao;
