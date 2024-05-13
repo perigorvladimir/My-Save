@@ -33,22 +33,13 @@ public class SaveService implements SaveUC {
                             .orElseThrow( () -> new EntityNotFoundException("Não existe Save com o id informado"));
 
             return ResponseServer.<Save>builder()
-                    .statusCode(200)
                     .data(LocalDateTime.now())
                     .dado(save)
                     .mensagem("Sucesso ao buscar Saves!")
                     .mensagemDesenvolvedor("Sucesso ao buscar Saves!")
                     .build();
-        } catch (EntityNotFoundException entityNotFoundException) {
+        } catch (Exception e){
             return ResponseServer.<Save>builder()
-                    .statusCode(404)
-                    .mensagem(entityNotFoundException.getMessage())
-                    .data(LocalDateTime.now())
-                    .build();
-        }
-        catch (Exception e){
-            return ResponseServer.<Save>builder()
-                    .statusCode(500)
                     .mensagem("Erro interno ao tentar buscar save. Por favor tente novamente.")
                     .mensagemDesenvolvedor(e.getMessage())
                     .data(LocalDateTime.now())
@@ -61,7 +52,6 @@ public class SaveService implements SaveUC {
             List<SaveEntity> saveEntities = saveRepository.findAllSaves();
             List<Save> saves = saveEntities.stream().map(saveEntity -> mapper.map(saveEntity, Save.class)).collect(Collectors.toList());
             return ResponseServer.<List<Save>>builder()
-                    .statusCode(200)
                     .data(LocalDateTime.now())
                     .dado(saves)
                     .mensagem("Sucesso ao buscar Saves!")
@@ -69,7 +59,6 @@ public class SaveService implements SaveUC {
                     .build();
         } catch (Exception e){
             return ResponseServer.<List<Save>>builder()
-                    .statusCode(500)
                     .mensagem("Erro interno ao tentar buscar saves. Por favor tente novamente.")
                     .mensagemDesenvolvedor(e.getMessage())
                     .build();
