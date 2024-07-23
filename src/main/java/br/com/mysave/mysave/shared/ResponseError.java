@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class ResponseError {
+    private String erro;
+    private String mensagem;
+    private String detalhes;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    LocalDateTime dataHora;
-    String mensagem;
-    String detalhes;
-
+    private LocalDateTime dataHora;
 }

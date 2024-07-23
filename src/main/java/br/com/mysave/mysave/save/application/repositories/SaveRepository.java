@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface SaveRepository {
     List<SaveEntity> findAllSaves() throws Exception;
-    Optional<SaveEntity> findSaveById(Integer id) throws Exception;
+    Optional<SaveEntity> findSaveById(Integer id);
 }
