@@ -2,18 +2,20 @@ package br.com.mysave.mysave.shared;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Builder
 @Getter
 @Setter
-public class ResponseServer<T>{
-    private T dado;
+@Builder
+public class ResponseError {
+    private String erro;
     private String mensagem;
-    private String mensagemDesenvolvedor;
+    private String detalhes;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    private LocalDateTime data;
+    private LocalDateTime dataHora;
 }
