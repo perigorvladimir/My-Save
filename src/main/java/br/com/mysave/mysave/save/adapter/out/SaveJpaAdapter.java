@@ -28,4 +28,9 @@ public class SaveJpaAdapter implements SaveRepository {
     public Optional<SaveEntity> findSaveById(Integer id) {
         return saveJpaRepository.findById(id);
     }
+
+    @Override
+    public void deletarSave(Integer id){
+        saveJpaRepository.deleteById(id);
+    }
 }
