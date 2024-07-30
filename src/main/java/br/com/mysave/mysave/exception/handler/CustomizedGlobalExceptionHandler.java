@@ -32,4 +32,13 @@ public class CustomizedGlobalExceptionHandler extends ResponseEntityExceptionHan
                 .detalhes(request.getDescription(false))
                 .build(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public final ResponseEntity<ResponseError> handleInputMismatchI(Exception ex, WebRequest request){
+        return new ResponseEntity<>(ResponseError.builder()
+                .erro(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .mensagem(ex.getMessage())
+                .dataHora(LocalDateTime.now())
+                .detalhes(request.getDescription(false))
+                .build(), HttpStatus.BAD_REQUEST);
+    }
 }

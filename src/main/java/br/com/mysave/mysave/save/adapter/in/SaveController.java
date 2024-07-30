@@ -15,6 +15,9 @@ public class SaveController {
 
     @GetMapping("/{saveId}")
     public ResponseEntity<?> findSaveById(@PathVariable Integer saveId){
+        if(saveId<0){
+            throw new IllegalArgumentException("Valor de input do id é inválido.");
+        }
         var response = saveUC.findSaveById(saveId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -33,6 +36,7 @@ public class SaveController {
     }
     @DeleteMapping("/{saveId}")
     public ResponseEntity<?> deletarSave(@PathVariable Integer saveId){
-        return ResponseEntity.ok("");
+        saveUC.deletarSave(saveId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 }

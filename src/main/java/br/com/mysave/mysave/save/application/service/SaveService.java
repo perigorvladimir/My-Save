@@ -70,8 +70,17 @@ public class SaveService implements SaveUC {
 
     @Override
     @Transactional
-    public ResponseServer<Boolean> deletarSave(Integer id) {
-        return null;
+    public ResponseServer<Void> deletarSave(Integer id) {
+        if(saveRepository.findSaveById(id).isEmpty()){
+            throw new EntityNotFoundException("Entidade a ser deletada não encontrada.");
+        }
+        saveRepository.deletarSave(id);
+
+        return ResponseServer.<Void>builder()
+                .data(LocalDateTime.now())
+                .mensagem("Sucesso ao deletar Save!")
+                .mensagemDesenvolvedor("Sucesso ao deletar Save!")
+                .build();
     }
 
 }
